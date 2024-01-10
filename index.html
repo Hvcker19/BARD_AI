@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bardai Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bardai Chat</h1>
+
+    <form id="chatForm">
+        <label for="message">Ask Bardai:</label>
+        <input type="text" id="message" name="message" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="resultContainer">
+        <h3>Result:</h3>
+        <p id="result"></p>
+        <h3>Image:</h3>
+        <div id="imageContainer"></div>
+    </div>
+
+    <script>
+        document.getElementById('chatForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const message = document.getElementById('message').value;
+
+            fetch(`/bard?ask=${encodeURIComponent(message)}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('result').textContent = data.result;
+                    document.getElementById('imageContainer').innerHTML = '';
+                    data.image.forEach(imageData => {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = imageData.url;
+                        imgElement.alt = imageData.tag;
+                        document.getElementById('imageContainer').appendChild(imgElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error fetching data. Please try again.');
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 const express = require('express');
 const fs = require('fs');
+const axios = require('axios');
+
 
 let sessionId, cookies;
 
@@ -89,6 +91,15 @@ const app = express();
 
 app.set('json spaces', 4);
 
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+
 app.get('/bard', async (req, res) => {
   let message = req.query.ask;
   if (!message) {
@@ -96,7 +107,7 @@ app.get('/bard', async (req, res) => {
   }
 
   try {
-    let sessionCookies = JSON.parse(fs.readFileSync('./BARD/bardSession.json'));
+    let sessionCookies = JSON.parse(fs.readFileSync('./bardSession.json'));
     let bard = new Bardai(sessionCookies);
     await bard.login();
     let responseFromBard = await chat(message);

@@ -1,7 +1,7 @@
 [
-  {
+    {
         "domain": ".google.com",
-        "expirationDate": 1719808102.392913,
+        "expirationDate": 1720232497.489292,
         "hostOnly": false,
         "httpOnly": true,
         "name": "__Secure-1PSID",
@@ -10,6 +10,6 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "ewjbMUTSqegoRyHOsPh4dn6Hi2QAHO3I0MwRH-equlkPE1-p5U9TR6qh2y2Dt9z8nknrKQ."
+        "value": "fAjbMSCLxnGbR_q-D-AV1rI9aiU2dcnMUFtU2YpMM5ioi-PChHV7f37Y__SohCRhvuFQ8A."
     }
 ]
